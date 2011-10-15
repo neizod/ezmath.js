@@ -61,8 +61,37 @@
 "|->"           %{ yytext = "\\mapsto";                return 'SYMBOL'; %}
 
 
-"..."           %{ yytext = "\\ldots";                  return 'OTHER'; %}
-(("I"|"i")"nf"("ini")?"ty")   %{ yytext = "\\infty";    return 'OTHER'; %}
+"..."           %{ yytext = "\\ldots";                 return 'OTHER'; %}
+(("I"|"i")"nf"("ini")?"ty")   %{ yytext = "\\infty";   return 'OTHER'; %}
+
+
+
+
+("der")         |
+("part"("ial")?)	{ yylval = (int)"\\partial"; return SOTH; }
+("grad")        |
+("nabla")       { yylval = (int)"\\nabla"; return SOTH; }
+
+(("for"(" ")?)?"all")   { yylval = (int)"\\forall"; return SSET; }
+("exists")      { yylval = (int)"\\exists"; return SSET; }
+
+("in")          { yylval = (int)"\\in"; return SSET; }
+("not"(" ")?"in")       { yylval = (int)"\\notin"; return SSET; }
+("subset")      { yylval = (int)"\\subseteq"; return SSET; }
+("sup"("er")?"set")     { yylval = (int)"\\supseteq"; return SSET; }
+
+("union")       |
+("cup")         { yylval = (int)"\\cup"; return SSET; }
+("intersect"("ion")?)   |
+("cap")         { yylval = (int)"\\cap"; return SSET; }
+"\\"            { yylval = (int)"\\setminus"; return SSET; }
+
+
+
+
+
+
+
 
 
 
