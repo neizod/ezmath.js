@@ -1,2 +1,2 @@
-make:
-	jison math.jison -o ezmath.js
+make:	new.jison
+	jison new.jison -o ezmath.js
