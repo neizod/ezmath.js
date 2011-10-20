@@ -1,4 +1,4 @@
-/* description: Parses end executes mathematical expressions. */
+/* description: Parses EzMath to LaTeX. */
 
 /* lexical grammar */
 %lex
@@ -23,7 +23,7 @@
 
 "~"             %{ yytext = "\\sim";        return 'SYMBOL'; %}
 ("deg"("ree")?) %{ yytext = "{^\\circ}";    return 'SYMBOL'; %}
-("star")        %{ yytext = "\\star";       return 'SYMBOL'; %}
+"star"          %{ yytext = "\\star";       return 'SYMBOL'; %}
 
 "||"            %{ yytext = "\\|";          return 'SYMBOL'; %}
 "|"             %{ yytext = "|";            return 'SYMBOL'; %}
@@ -58,33 +58,97 @@
 "=>"            %{ yytext = "\\Rightarrow";            return 'SYMBOL'; %}
 "==>"           %{ yytext = "\\Longrightarrow";        return 'SYMBOL'; %}
 "<=="           %{ yytext = "\\Longleftarrow";         return 'SYMBOL'; %}
-"|->"           %{ yytext = "\\mapsto";                return 'SYMBOL'; %}
+"|->"           %{ /* bug */ yytext = "\\mapsto";                return 'SYMBOL'; %}
 
 
-"..."           %{ yytext = "\\ldots";                 return 'OTHER'; %}
-(("I"|"i")"nf"("ini")?"ty")   %{ yytext = "\\infty";   return 'OTHER'; %}
+"..."           %{ yytext = "\\ldots";      return 'SYMBOL'; %}
+"infinity"      %{ yytext = "\\infty";      return 'SYMBOL'; %}
+
+
+("der")         %{ yytext = "\\partial";    return 'SYMBOL'; %}
+"nabla"         %{ yytext = "\\nabla";      return 'SYMBOL'; %}
+
+"all"           %{ yytext = "\\forall";     return 'SYMBOL'; %}
+"exists"        %{ yytext = "\\exists";     return 'SYMBOL'; %}
+
+"in"            %{ yytext = "\\in";         return 'SYMBOL'; %}
+"not in"        %{ yytext = "\\notin";      return 'SYMBOL'; %}
+"subset"        %{ yytext = "\\subseteq";   return 'SYMBOL'; %}
+"supset"        %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
+"superset"      %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
+
+"union"         %{ yytext = "\\cup";        return 'SYMBOL'; %}
+"intersect"     %{ yytext = "\\cap";        return 'SYMBOL'; %}
+"intersection"  %{ yytext = "\\cap";        return 'SYMBOL'; %}
+"\\"            %{ yytext = "\\setminus";   return 'SYMBOL'; %}
 
 
 
 
-("der")         |
-("part"("ial")?)	{ yylval = (int)"\\partial"; return SOTH; }
-("grad")        |
-("nabla")       { yylval = (int)"\\nabla"; return SOTH; }
+"empty"         %{ yytext = "\\emptyset";   return 'SYMBOL'; %}
+"Eset"          %{ yytext = "\\varnothing"; return 'SYMBOL'; %}
+"Nset"          %{ yytext = "\\mathbb{N}";  return 'SYMBOL'; %}
+"Zset"          %{ yytext = "\\mathbb{Z}";  return 'SYMBOL'; %}
+"Pset"          %{ yytext = "\\mathbb{P}";  return 'SYMBOL'; %}
+"Qset"          %{ yytext = "\\mathbb{Q}";  return 'SYMBOL'; %}
+"Rset"          %{ yytext = "\\mathbb{R}";  return 'SYMBOL'; %}
+"Cset"          %{ yytext = "\\mathbb{C}";  return 'SYMBOL'; %}
+"Hset"          %{ yytext = "\\mathbb{H}";  return 'SYMBOL'; %}
+"aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
+"Aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
+"Re"            %{ yytext = "\\Re";         return 'SYMBOL'; %}
+"Im"            %{ yytext = "\\Im";         return 'SYMBOL'; %}
 
-(("for"(" ")?)?"all")   { yylval = (int)"\\forall"; return SSET; }
-("exists")      { yylval = (int)"\\exists"; return SSET; }
+"exp"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"log"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"ln"            %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
-("in")          { yylval = (int)"\\in"; return SSET; }
-("not"(" ")?"in")       { yylval = (int)"\\notin"; return SSET; }
-("subset")      { yylval = (int)"\\subseteq"; return SSET; }
-("sup"("er")?"set")     { yylval = (int)"\\supseteq"; return SSET; }
+"max"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"min"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"gcd"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
-("union")       |
-("cup")         { yylval = (int)"\\cup"; return SSET; }
-("intersect"("ion")?)   |
-("cap")         { yylval = (int)"\\cap"; return SSET; }
-"\\"            { yylval = (int)"\\setminus"; return SSET; }
+"det"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"mod"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+
+"inf"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"sup"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+
+"sin"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"cos"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"tan"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"cot"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"sec"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"csc"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"sinh"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"cosh"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"tanh"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"coth"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"sech"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"csch"          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+
+"asin"          %{ yytext = "\\sin^{-1}";   return 'SYMBOL'; %}
+"acos"          %{ yytext = "\\cos^{-1}";   return 'SYMBOL'; %}
+"atan"          %{ yytext = "\\tan^{-1}";   return 'SYMBOL'; %}
+"acot"          %{ yytext = "\\cot^{-1}";   return 'SYMBOL'; %}
+"asec"          %{ yytext = "\\sec^{-1}";   return 'SYMBOL'; %}
+"acsc"          %{ yytext = "\\csc^{-1}";   return 'SYMBOL'; %}
+"asinh"         %{ yytext = "\\sinh^{-1}";  return 'SYMBOL'; %}
+"acosh"         %{ yytext = "\\cosh^{-1}";  return 'SYMBOL'; %}
+"atanh"         %{ yytext = "\\tanh^{-1}";  return 'SYMBOL'; %}
+"acoth"         %{ yytext = "\\coth^{-1}";  return 'SYMBOL'; %}
+"asech"         %{ yytext = "\\sech^{-1}";  return 'SYMBOL'; %}
+"acsch"         %{ yytext = "\\csch^{-1}";  return 'SYMBOL'; %}
+
+"lcm"           %{ return 'OPNAME'; %}
+"sgn"           %{ return 'OPNAME'; %}
+"rad"           %{ return 'OPNAME'; %}
+"case"          %{ return 'OPNAME'; %}
+
+
+
+
+
+
 
 
 
@@ -114,6 +178,6 @@ sent: e
 | sent e          { $$ = $1 + $2; }
 ;
 e: SYMBOL         { $$ = yytext; }
-| OTHER           { $$ = yytext; /* debug only */ }
+| OPNAME          { $$ = "\\operatorname{"+yytext+"}" }
 ;
 
