@@ -195,6 +195,7 @@
 ("Omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 ("omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
+
 [0-9]+"."[0-9]*"..."[0-9]+"..."          %{ return 'REPEAT'; %}
 [0-9]+("."[0-9]+("...")?)?	         %{ return 'SYMBOL'; %}
 
@@ -204,8 +205,19 @@
 
 [a-zA-Z]        %{ yytext = " "+yytext;     return 'SYMBOL'; %}
 [%&]            %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-[`':!@\?\$]                              %{ return 'SYMBOL'; %}
+[`':!\@\?\$]                             %{ return 'SYMBOL'; %}
 
+
+"("(" ")?"mod"  %{ return 'OP_M'; %}
+"("             %{ return 'OP'; %}
+")"             %{ return 'CP'; %}
+
+"{"             %{ return 'OS'; %}
+"}"             %{ return 'CS'; %}
+
+^"["            |
+"bmatrix ["     %{ /* bug here */ return 'OB_M'; %}
+"["             %{ return 'OB'; %}
 
 
 
@@ -223,16 +235,36 @@
 
 %% /* language grammar */
 
-exp: sent EOF     { return $1; }
+list
+: sentence EOF     { return $1; }
 ;
 
-sent: e
-| sent e          { $$ = $1 + $2; }
+sentence
+: /* nothing */    { $$ = ""; }
+| subsentence
 ;
-e: SYMBOL         { $$ = yytext; }
-| REPEAT          { var i = $$.length-1; while($$.charAt(i)==".") i--;
-                    var j = i-1;         while($$.charAt(j)!=".") j--;
-                    $$ = $$.slice(0,j-2)+"\\overline{"+$$.slice(j+1,i+1)+"}"; }
-| OPNAME          { $$ = "\\operatorname{"+yytext+"}"; }
+
+subsentence
+: element
+| subsentence element    { $$ = $1+$2; }
+;
+
+element
+: e
+| subbracket
+;
+
+subbracket
+: OP_M sentence CP { $$ = "\\pmod{"+$2+"}"; }
+;
+
+e
+: SYMBOL           { $$ = yytext; }
+| REPEAT           { var i = $$.length-1; while($$.charAt(i)==".") i--;
+                     var j = i-1;         while($$.charAt(j)!=".") j--;
+                     $$ = $$.slice(0,j-2)+"\\overline{"+$$.slice(j+1,i+1)+"}"; }
+| OPNAME           { $$ = "\\operatorname{"+yytext+"}"; }
+| OB_M  { $$ = "OpenB2Mtx"; }
+| OB    { $$ = "OpenB4Idx"; }
 ;
 
