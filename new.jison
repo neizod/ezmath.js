@@ -4,39 +4,36 @@
 %lex
 %%
 
-"+-"            %{ yytext = "\\pm";         return 'SYMBOL'; %}
-"-+"            %{ yytext = "\\mp";         return 'SYMBOL'; %}
+"(ast)"         %{ yytext = "\\circleast";  return 'SYMBOL'; %}
 
-"+"             %{ yytext = "+";            return 'SYMBOL'; %}
-"-"             %{ yytext = "-";            return 'SYMBOL'; %}
-"*"             %{ yytext = "\\times";      return 'SYMBOL'; %}
-"."             %{ yytext = "\\cdot";       return 'SYMBOL'; %}
-("ast")         %{ yytext = "*";            return 'SYMBOL'; %}
-"//"            %{ yytext = "\\div";        return 'SYMBOL'; %}
+"<==>"          %{ yytext = "\\Longleftrightarrow";    return 'SYMBOL'; %}
+"<-->"          %{ yytext = "\\longleftrightarrow";    return 'SYMBOL'; %}
 
 "(+)"           %{ yytext = "\\oplus";      return 'SYMBOL'; %}
 "(-)"           %{ yytext = "\\ominus";     return 'SYMBOL'; %}
 "(*)"           %{ yytext = "\\otimes";     return 'SYMBOL'; %}
 "(.)"           %{ yytext = "\\odot";       return 'SYMBOL'; %}
-"(ast)"         %{ yytext = "\\circleast";  return 'SYMBOL'; %}
 "(/)"           %{ yytext = "\\oslash";     return 'SYMBOL'; %}
 
-"~"             %{ yytext = "\\sim";        return 'SYMBOL'; %}
-("deg"("ree")?) %{ yytext = "{^\\circ}";    return 'SYMBOL'; %}
-"star"          %{ yytext = "\\star";       return 'SYMBOL'; %}
+"<=>"           %{ yytext = "\\Leftrightarrow";        return 'SYMBOL'; %}
+"==>"           %{ yytext = "\\Longrightarrow";        return 'SYMBOL'; %}
+"<=="           %{ yytext = "\\Longleftarrow";         return 'SYMBOL'; %}
+"<->"           %{ yytext = "\\leftrightarrow";        return 'SYMBOL'; %}
+"-->"           %{ yytext = "\\longrightarrow";        return 'SYMBOL'; %}
+"<--"           %{ yytext = "\\longleftarrow";         return 'SYMBOL'; %}
+"|->"           %{ yytext = "\\mapsto";                return 'SYMBOL'; %}
 
-"||"            %{ yytext = "\\|";          return 'SYMBOL'; %}
-"|"             %{ yytext = "|";            return 'SYMBOL'; %}
+"..."           %{ yytext = "\\ldots";      return 'SYMBOL'; %}
 
-
-"="             %{ yytext = "=";            return 'SYMBOL'; %}
-"=="            %{ yytext = "\\equiv";      return 'SYMBOL'; %}
 "~="            %{ yytext = "\\cong";       return 'SYMBOL'; %}
 "~~"            %{ yytext = "\\approx";     return 'SYMBOL'; %}
-"propto"        %{ yytext = "\\propto";     return 'SYMBOL'; %}
+"=="            %{ yytext = "\\equiv";      return 'SYMBOL'; %}
 "!="            %{ yytext = "\\neq";        return 'SYMBOL'; %}
-"<"             %{ yytext = "\\lt";         return 'SYMBOL'; %}
-">"             %{ yytext = "\\gt";         return 'SYMBOL'; %}
+
+"=>"            %{ yytext = "\\Rightarrow";            return 'SYMBOL'; %}
+"->"            %{ yytext = "\\rightarrow";            return 'SYMBOL'; %}
+"<-"            %{ yytext = "\\leftarrow";             return 'SYMBOL'; %}
+
 "<<"            %{ yytext = "\\ll";         return 'SYMBOL'; %}
 ">>"            %{ yytext = "\\gg";         return 'SYMBOL'; %}
 "<="            %{ yytext = "\\leq";        return 'SYMBOL'; %}
@@ -44,47 +41,54 @@
 "-<"            %{ yytext = "\\prec";       return 'SYMBOL'; %}
 ">-"            %{ yytext = "\\succ";       return 'SYMBOL'; %}
 
+"//"            %{ yytext = "\\div";        return 'SYMBOL'; %}
+"||"            %{ yytext = "\\|";          return 'SYMBOL'; %}
+"\\"            %{ yytext = "\\setminus";   return 'SYMBOL'; %}
+
+"+-"            %{ yytext = "\\pm";         return 'SYMBOL'; %}
+"-+"            %{ yytext = "\\mp";         return 'SYMBOL'; %}
+
+"+"             %{ yytext = "+";            return 'SYMBOL'; %}
+"-"             %{ yytext = "-";            return 'SYMBOL'; %}
+"*"             %{ yytext = "\\times";      return 'SYMBOL'; %}
+"."             %{ yytext = "\\cdot";       return 'SYMBOL'; %}
+
+"="             %{ yytext = "=";            return 'SYMBOL'; %}
+"<"             %{ yytext = "\\lt";         return 'SYMBOL'; %}
+">"             %{ yytext = "\\gt";         return 'SYMBOL'; %}
+
+"~"             %{ yytext = "\\sim";        return 'SYMBOL'; %}
+"|"             %{ yytext = "|";            return 'SYMBOL'; %}
+
+
+("ast")         %{ yytext = "*";            return 'SYMBOL'; %}
+("deg"("ree")?) %{ yytext = "{^\\circ}";    return 'SYMBOL'; %}
+("star")        %{ yytext = "\\star";       return 'SYMBOL'; %}
+("der")         %{ yytext = "\\partial";    return 'SYMBOL'; %}
+("nabla")       %{ yytext = "\\nabla";      return 'SYMBOL'; %}
+
+"propto"        %{ yytext = "\\propto";     return 'SYMBOL'; %}
+"infinity"      %{ yytext = "\\infty";      return 'SYMBOL'; %}
+
+"exists"        %{ yytext = "\\exists";     return 'SYMBOL'; %}
+"all"           %{ yytext = "\\forall";     return 'SYMBOL'; %}
+
+"superset"      %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
+"supset"        %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
+"subset"        %{ yytext = "\\subseteq";   return 'SYMBOL'; %}
+"not in"        %{ yytext = "\\notin";      return 'SYMBOL'; %}
+"in"            %{ yytext = "\\in";         return 'SYMBOL'; %}
+
+"intersection"  %{ yytext = "\\cap";        return 'SYMBOL'; %}
+"intersect"     %{ yytext = "\\cap";        return 'SYMBOL'; %}
+"union"         %{ yytext = "\\cup";        return 'SYMBOL'; %}
+
 "and"           %{ yytext = "\\land";       return 'SYMBOL'; %}
 "or"            %{ yytext = "\\lor";        return 'SYMBOL'; %}
 "not"           %{ yytext = "\\neg";        return 'SYMBOL'; %}
-"<->"           %{ yytext = "\\leftrightarrow";        return 'SYMBOL'; %}
-"<-->"          %{ yytext = "\\longleftrightarrow";    return 'SYMBOL'; %}
-"->"            %{ yytext = "\\rightarrow";            return 'SYMBOL'; %}
-"-->"           %{ yytext = "\\longrightarrow";        return 'SYMBOL'; %}
-"<-"            %{ yytext = "\\leftarrow";             return 'SYMBOL'; %}
-"<--"           %{ yytext = "\\longleftarrow";         return 'SYMBOL'; %}
-"<=>"           %{ yytext = "\\Leftrightarrow";        return 'SYMBOL'; %}
-"<==>"          %{ yytext = "\\Longleftrightarrow";    return 'SYMBOL'; %}
-"=>"            %{ yytext = "\\Rightarrow";            return 'SYMBOL'; %}
-"==>"           %{ yytext = "\\Longrightarrow";        return 'SYMBOL'; %}
-"<=="           %{ yytext = "\\Longleftarrow";         return 'SYMBOL'; %}
-"|->"           %{ /* bug */ yytext = "\\mapsto";                return 'SYMBOL'; %}
 
-
-"..."           %{ yytext = "\\ldots";      return 'SYMBOL'; %}
-"infinity"      %{ yytext = "\\infty";      return 'SYMBOL'; %}
-
-
-("der")         %{ yytext = "\\partial";    return 'SYMBOL'; %}
-"nabla"         %{ yytext = "\\nabla";      return 'SYMBOL'; %}
-
-"all"           %{ yytext = "\\forall";     return 'SYMBOL'; %}
-"exists"        %{ yytext = "\\exists";     return 'SYMBOL'; %}
-
-"in"            %{ yytext = "\\in";         return 'SYMBOL'; %}
-"not in"        %{ yytext = "\\notin";      return 'SYMBOL'; %}
-"subset"        %{ yytext = "\\subseteq";   return 'SYMBOL'; %}
-"supset"        %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
-"superset"      %{ yytext = "\\supseteq";   return 'SYMBOL'; %}
-
-"union"         %{ yytext = "\\cup";        return 'SYMBOL'; %}
-"intersect"     %{ yytext = "\\cap";        return 'SYMBOL'; %}
-"intersection"  %{ yytext = "\\cap";        return 'SYMBOL'; %}
-"\\"            %{ yytext = "\\setminus";   return 'SYMBOL'; %}
-
-
-
-
+"aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
+"Aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
 "empty"         %{ yytext = "\\emptyset";   return 'SYMBOL'; %}
 "Eset"          %{ yytext = "\\varnothing"; return 'SYMBOL'; %}
 "Nset"          %{ yytext = "\\mathbb{N}";  return 'SYMBOL'; %}
@@ -94,8 +98,6 @@
 "Rset"          %{ yytext = "\\mathbb{R}";  return 'SYMBOL'; %}
 "Cset"          %{ yytext = "\\mathbb{C}";  return 'SYMBOL'; %}
 "Hset"          %{ yytext = "\\mathbb{H}";  return 'SYMBOL'; %}
-"aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
-"Aleph"         %{ yytext = "\\aleph";      return 'SYMBOL'; %}
 "Re"            %{ yytext = "\\Re";         return 'SYMBOL'; %}
 "Im"            %{ yytext = "\\Im";         return 'SYMBOL'; %}
 
@@ -105,13 +107,12 @@
 
 "max"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 "min"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-"gcd"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-
-"det"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-"mod"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-
 "inf"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 "sup"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+
+"gcd"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"det"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+"mod"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
 "sin"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 "cos"           %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
@@ -194,12 +195,16 @@
 ("Omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 ("omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
+[0-9]+"."[0-9]*"..."[0-9]+"..."          %{ return 'REPEAT'; %}
+[0-9]+("."[0-9]+("...")?)?	         %{ return 'SYMBOL'; %}
+
+\@\"[^\"]*\"    %{ yytext = yytext.slice(2,-1);               return 'SYMBOL'; %}
+\"\"            %{ yytext = "{}";           return 'SYMBOL'; %}
+\"[^\"]*\"      %{ yytext = "\\text{"+yytext.slice(1,-1)+"}"; return 'SYMBOL'; %}
+
 [a-zA-Z]        %{ yytext = " "+yytext;     return 'SYMBOL'; %}
-[':!@\?\$]      %{ yytext = yytext;         return 'SYMBOL'; %}
 [%&]            %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
-
-
-
+[`':!@\?\$]                              %{ return 'SYMBOL'; %}
 
 
 
@@ -225,6 +230,9 @@ sent: e
 | sent e          { $$ = $1 + $2; }
 ;
 e: SYMBOL         { $$ = yytext; }
-| OPNAME          { $$ = "\\operatorname{"+yytext+"}" }
+| REPEAT          { var i = $$.length-1; while($$.charAt(i)==".") i--;
+                    var j = i-1;         while($$.charAt(j)!=".") j--;
+                    $$ = $$.slice(0,j-2)+"\\overline{"+$$.slice(j+1,i+1)+"}"; }
+| OPNAME          { $$ = "\\operatorname{"+yytext+"}"; }
 ;
 
