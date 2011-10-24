@@ -147,9 +147,56 @@
 
 
 
+("hbar")        %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("imath")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("jmath")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("ell")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
+("alpha")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("beta")        %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Gamma")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("gamma")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Delta")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("delta")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("epsilon")     %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("varepsilon")  %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("zeta")        %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("eta")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Theta")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("vartheta")    %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("theta")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("iota")        %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("kappa")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Lambda")      %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("lambda")      %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("mu")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("nu")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Xi")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("xi")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("omicron")     %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Pi")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("varpi")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("pi")          %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("varrho")      %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("rho")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Sigma")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("varsigma")    %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("sigma")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("tau")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Upsilon")     %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("upsilon")     %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Phi")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("varphi")      %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("phi")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("chi")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Psi")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("psi")         %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("Omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
+("omega")       %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
-
+[a-zA-Z]        %{ yytext = " "+yytext;     return 'SYMBOL'; %}
+[':!@\?\$]      %{ yytext = yytext;         return 'SYMBOL'; %}
+[%&]            %{ yytext = "\\"+yytext;    return 'SYMBOL'; %}
 
 
 
